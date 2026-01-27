@@ -10,6 +10,7 @@ type Comment = {
 };
 
 export default function CommentsSection({ movieId, comments }: { movieId: string, comments: Comment[] }) {
+  const API_URL = process.env.NEXT_PUBLIC_API_URL!;
   const [authorName, setAuthorName] = useState("");
   const [text, setText] = useState("");
   const [rating, setRating] = useState<number | null>(null);
@@ -24,7 +25,7 @@ export default function CommentsSection({ movieId, comments }: { movieId: string
     setLoading(true);
 
     try {
-      const res = await fetch(`http://localhost:4242/movie/${movieId}/commentandrate`, {
+      const res = await fetch(`${API_URL}/movie/${movieId}/commentandrate`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"

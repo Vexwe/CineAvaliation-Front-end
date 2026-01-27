@@ -3,7 +3,11 @@
 import { useState } from "react";
 import Header from "../components/Header";
 
+
+
 export default function AddMovie() {
+  const API_URL = process.env.NEXT_PUBLIC_API_URL!;
+
   const [form, setForm] = useState({
     name: "",
     description: "",
@@ -37,7 +41,7 @@ export default function AddMovie() {
     data.append("description", form.description);
     data.append("image", imageFile); // nome do campo do backend
 
-    const res = await fetch("http://localhost:4242/addmovie", {
+    const res = await fetch(`${API_URL}/addmovie`, {
       method: "POST",
       body: data, // NÃO definir Content-Type manualmente
     });

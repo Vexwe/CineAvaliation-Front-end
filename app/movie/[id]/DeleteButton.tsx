@@ -1,13 +1,14 @@
 "use client";
 
 export default function DeleteButton({ movieId }: { movieId: string }) {
+  const API_URL = process.env.NEXT_PUBLIC_API_URL!;
 
   async function handleDelete() {
     const confirmDelete = confirm("Tem certeza que deseja excluir este filme?");
     if (!confirmDelete) return;
 
     try {
-      const res = await fetch(`http://localhost:4242/edit/${movieId}`, {
+      const res = await fetch(`${API_URL}/edit/${movieId}`, {
         method: "DELETE"
       });
 

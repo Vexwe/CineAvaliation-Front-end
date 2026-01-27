@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import Header from "@/app/components/Header";
 
 export default function EditForm({ id }: { id: string }) {
+  const API_URL = process.env.NEXT_PUBLIC_API_URL!;
   const router = useRouter();
 
   const [name, setName] = useState("");
@@ -15,13 +16,13 @@ export default function EditForm({ id }: { id: string }) {
 
   useEffect(() => {
     async function loadMovie() {
-      const res = await fetch(`http://localhost:4242/movie/${id}`);
+      const res = await fetch(`${API_URL}/movie/${id}`);
       const data = await res.json();
 
       setName(data.name || "");
       setDescription(data.description || "");
       if (data.image) {
-        setPreview(`http://localhost:4242${data.image}`);
+        setPreview(`${API_URL}${data.image}`);
       }
     }
 
@@ -37,7 +38,7 @@ export default function EditForm({ id }: { id: string }) {
     formData.append("description", description);
     if (image) formData.append("image", image);
 
-    const res = await fetch(`http://localhost:4242/edit/${id}`, {
+    const res = await fetch(`${API_URL}/edit/${id}`, {
       method: "PUT",
       body: formData
     });

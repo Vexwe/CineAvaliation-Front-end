@@ -4,10 +4,10 @@ import Link from "next/link";
 import DeleteButton from "./DeleteButton";
 
 export default async function MoviePage({ params }: { params: Promise<{ id: string }> }) {
-
+  const API_URL = process.env.NEXT_PUBLIC_API_URL!;
   const { id } = await params;
 
-  const res = await fetch(`http://localhost:4242/movie/${id}`, {
+  const res = await fetch(`${API_URL}/movie/${id}`, {
     cache: "no-store"
   });
 
@@ -53,7 +53,7 @@ export default async function MoviePage({ params }: { params: Promise<{ id: stri
           {movie.image && (
             <div className="w-full aspect-[2.8/3] bg-zinc-900 flex items-center justify-center rounded-lg">
               <img
-                src={`http://localhost:4242${movie.image}`}
+                src={`${API_URL}${movie.image}`}
                 alt={movie.name}
                 className="max-h-full max-w-full object-contain"
               />
