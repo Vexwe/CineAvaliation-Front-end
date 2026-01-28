@@ -2,7 +2,8 @@ import Header from "./components/Header";
 import Link from "next/link";
 
 export default async function Home() {
-  const res = await fetch("http://localhost:4242/", {
+  const API_URL = process.env.NEXT_PUBLIC_API_URL!;
+  const res = await fetch(API_URL, {
     cache: "no-store",
   });
 
@@ -31,7 +32,7 @@ export default async function Home() {
             {/* IMAGEM */}
             {movie.image && (
               <img
-                src={`http://localhost:4242${movie.image}`}
+                src={`${API_URL}${movie.image}`}
                 alt={movie.name}
                 className="w-full h-[360px] object-contain bg-zinc-900"
               />
